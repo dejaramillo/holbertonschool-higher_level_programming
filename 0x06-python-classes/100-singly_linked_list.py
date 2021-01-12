@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""Define a class Square"""
+
+
 class Node:
     """
     This is a class for define a node for linked list
