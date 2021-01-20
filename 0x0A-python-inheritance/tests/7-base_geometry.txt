@@ -1,0 +1,84 @@
+=====
+Tests
+=====
+
+>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+>>> bg = BaseGeometry()
+>>> bg.integer_validator("my_int", 12)
+>>> bg.integer_validator("width", 89)
+
+Test 1
+======
+>>> try:
+...    bg.integer_validator("name", "John")
+... except Exception as e:
+...    print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] name must be an integer
+
+Test 2
+======
+>>> try:
+...    bg.integer_validator("age", 0)
+... except Exception as e:
+...    print("[{}] {}".format(e.__class__.__name__, e))
+[ValueError] age must be greater than 0
+
+Test 3
+======
+>>> try:
+...    bg.integer_validator("distance", -4)
+... except Exception as e:
+...    print("[{}] {}".format(e.__class__.__name__, e))
+[ValueError] distance must be greater than 0
+
+Test 4
+======
+>>> try:
+...     print(bg.area())
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[Exception] area() is not implemented
+
+Test 5
+======
+>>> print(type(bg))
+<class '7-base_geometry.BaseGeometry'>
+
+Test 6
+======
+>>> print(bg.my_int)
+Traceback (most recent call last):
+...
+AttributeError: 'BaseGeometry' object has no attribute 'my_int'
+
+Test 7
+=======
+>>> try:
+...    bg.integer_validator("tuple", (1, 2))
+... except Exception as e:
+...    print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] tuple must be an integer
+
+Test 8
+======
+>>> try:
+...    bg.integer_validator("bool", True)
+... except Exception as e:
+...    print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] bool must be an integer
+
+Test 9
+======
+>>> try:
+...    bg.integer_validator("set", {'s', 'e', 't'})
+... except Exception as e:
+...    print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] set must be an integer
+
+Test 10
+=======
+>>> try:
+...    bg.integer_validator("float", 0.2)
+... except Exception as e:
+...    print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] float must be an integer
