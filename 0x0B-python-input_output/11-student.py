@@ -1,29 +1,36 @@
 #!/usr/bin/python3
-"""
-This module provides Student class
-"""
+"""Student to JSON module"""
 
 
-class Student:
-    """
-    Class of Student
+class Student():
+    """Student class"""
 
-    Attributes:
-        attr1 (first_name): first name of the student
-        attr2 (last_name): last name of the student
-        attr3 (age): age of the student
-    """
     def __init__(self, first_name, last_name, age):
-        """
-        This is the constructor of the class
-        """
+        """Student constructor"""
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
 
-    def to_json(self):
-        items = {}
-        for attribute, value in sorted(self.__dict__.items()):
-            items[attribute] = value
+    def to_json(self, attrs=None):
+        '''Returns dictionary description of json object filtered'''
+        flag = False
+        if (type(attrs) is list):
+            flag = True
+            for attr in attrs:
+                if type(attr) is not str:
+                    flag = False
+        if flag is True:
+            my_dict = {}
+            for key, value in self.__dict__.items():
+                if key in attrs:
+                    my_dict[key] = value
+        else:
+            my_dict = self.__dict__.copy()
 
-        return items
+        return my_dict
+
+    def reload_from_json(self, json):
+        """Updates attributes with json"""
+
+        for key, value in json.items():
+            self.__dict__[key] = value
